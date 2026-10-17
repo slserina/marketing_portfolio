@@ -205,3 +205,15 @@ img, video { max-width: 100%; }
   .thumb { display: none !important; }
   a.card:hover { transform: none; }
 }
+
+/* ---------------------------------------------------------------------
+   Wide screens (> 1440px): backgrounds run edge to edge, while the
+   content keeps its 1280px column, centered. Nothing changes at <= 1440.
+   --------------------------------------------------------------------- */
+@media (min-width: 1441px) {
+  .topbar, .nextbar, .sec, .s-about, .s-projects, .s-skills, .heroin, .f-in {
+    padding-left: max(80px, calc((100% - 1280px) / 2)) !important;
+    padding-right: max(80px, calc((100% - 1280px) / 2)) !important;
+  }
+  .hero-photo, .hero-shade { right: max(80px, calc((100% - 1280px) / 2)) !important; }
+}
