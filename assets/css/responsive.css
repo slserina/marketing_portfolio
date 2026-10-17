@@ -1,0 +1,207 @@
+/* =====================================================================
+   Responsive layer for the Serina Li portfolio
+   ---------------------------------------------------------------------
+   The pages keep the original 1440px desktop design as the reference.
+   Breakpoints:
+     >= 1440px     original desktop layout (content capped & centered)
+     1024-1439px   "laptop"  - same structure, scales fluidly
+     640-1023px    tablet    - tighter padding, stacked columns
+     <= 639px      mobile    - single column, touch-friendly
+   Most inline styles come from the original design, so rules below use
+   !important where they have to override those inline values.
+   ===================================================================== */
+
+:root { --u: min(1vw, 14.4px); }          /* 1% of the (capped) 1440 design width */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { overflow-x: hidden; }
+.pg  { overflow-x: clip; }
+img, video { max-width: 100%; }
+
+/* ---------------------------------------------------------------------
+   Shared project-page rules (project1-4)
+   --------------------------------------------------------------------- */
+@media (max-width: 1439px) {
+  .titlecol { width: auto !important; flex: 1.15 1 0 !important; min-width: 0; }
+  .meta     { flex: 1 1 0 !important; min-width: 0; max-width: none !important; }
+  .titlerow { gap: 56px !important; }
+  .t-h1 { font-size: clamp(34px, 7.4vw, var(--fs)) !important; overflow-wrap: anywhere; }
+  .t-h2 { font-size: clamp(26px, 4.2vw, var(--fs)) !important; }
+  .t-num{ font-size: clamp(36px, 6vw, var(--fs)) !important; }
+  .t-next{ font-size: clamp(24px, 4.6vw, var(--fs)) !important; }
+  .fluid { width: 100% !important; height: auto !important; }
+  .phones { flex-shrink: 1 !important; min-width: 0; }
+  .phone  { flex: 0 1 230px !important; width: auto !important; height: auto !important; min-width: 0; }
+  .logotext { width: auto !important; min-width: 0; flex: 1 1 0; }
+  .logoimg  { display: block !important; flex: 0 1 640px; min-width: 0; }
+  .logoimg img { width: 100% !important; }
+  .vid { width: 100% !important; max-width: 280px; height: auto !important; aspect-ratio: 280 / 564; }
+  .sec { min-width: 0; }
+  .card402 { height: calc(var(--u) * 27.9) !important; }
+  .g2, .g3, .g4 { min-width: 0; }
+  .g2 > *, .g3 > *, .g4 > * { min-width: 0; }
+  .g2 img, .g3 img { max-width: 100%; }
+}
+
+/* narrow laptop: rows with fixed-width neighbours become columns */
+@media (max-width: 1099px) {
+  .brief-row { flex-direction: column !important; align-items: flex-start !important; }
+  .brief-row > div:first-child { max-width: 720px !important; }
+  .logorow  { flex-direction: column !important; }
+  .logoimg  { flex: none; width: 100%; }
+}
+
+/* ---------------------------------------------------------------------
+   Tablet  (<= 1023px)
+   --------------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .topbar, .nextbar { padding-left: 40px !important; padding-right: 40px !important; }
+  .topbar { min-height: 80px !important; }
+  .nextbar { min-height: 130px !important; }
+  .sec { padding-left: 40px !important; padding-right: 40px !important;
+         padding-top: 56px !important; padding-bottom: 56px !important; min-height: 0 !important; }
+  .nextbar { min-height: 130px !important; }
+  .titlerow { flex-direction: column !important; gap: 8px !important; }
+  .titlecol { flex: none !important; width: 100% !important; padding-top: 0 !important; }
+  .meta { padding-top: 24px !important; width: 100%; flex-direction: row !important; flex-wrap: wrap; gap: 24px 40px !important; }
+  .meta > div { min-width: 140px; flex: 1 1 200px; }
+  .g2 { gap: 40px !important; }
+  .g2.stats, .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px !important; }
+  .g3 { gap: 20px !important; }
+  .stats { padding: 32px 32px !important; }
+  .feat { height: auto !important; aspect-ratio: 4 / 3; }
+  .logoimg img { height: auto !important; aspect-ratio: 640 / 300; }
+  .promo { height: auto !important; min-height: 240px; padding: 24px 20px !important; }
+  .evphoto { height: auto !important; aspect-ratio: 1 / 1.2; }
+  .card402 { height: 40vw !important; }
+}
+
+/* ---------------------------------------------------------------------
+   Mobile  (<= 639px)
+   --------------------------------------------------------------------- */
+@media (max-width: 639px) {
+  .topbar, .nextbar { padding-left: 20px !important; padding-right: 20px !important; }
+  .topbar { min-height: 68px !important; }
+  .topbar a:first-child { font-size: 14px !important; }
+  .topbar a:last-child  { font-size: 22px !important; }
+  .sec { padding-left: 20px !important; padding-right: 20px !important;
+         padding-top: 44px !important; padding-bottom: 44px !important; }
+  .nextbar { flex-direction: column !important; align-items: flex-start !important; justify-content: center !important;
+             gap: 6px !important; padding-top: 32px !important; padding-bottom: 32px !important; }
+  .meta { flex-direction: column !important; gap: 18px !important; padding-top: 20px !important; }
+  .meta > div { flex: none; width: 100%; }
+  .g2, .g3 { grid-template-columns: minmax(0, 1fr) !important; gap: 28px !important; }
+  .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 24px 16px !important; }
+  .stats { padding: 24px 20px !important; border-radius: 16px !important; }
+  .t-num { font-size: clamp(34px, 11vw, var(--fs)) !important; }
+  .brief-row { gap: 28px !important; }
+  .phones { gap: 14px !important; width: 100%; justify-content: center !important; padding-top: 0 !important; }
+  .phone { flex: 0 1 46% !important; }
+  .vid { margin: 0 auto; }
+  .feat { aspect-ratio: 4 / 3; }
+  .evphoto { aspect-ratio: 4 / 3.4; }
+  .promo { min-height: 0; }
+  .card402 { height: auto !important; }
+  .card402 img { height: auto !important; }
+  p { overflow-wrap: break-word; }
+}
+
+/* ---------------------------------------------------------------------
+   HOME PAGE
+   --------------------------------------------------------------------- */
+/* --- laptop / fluid (<= 1439px): hero scales with the viewport --- */
+@media (max-width: 1439px) {
+  .hero { height: clamp(640px, calc(var(--u) * 62.5), 900px) !important; }
+  .hero-photo, .hero-shade { right: calc(var(--u) * 5.556) !important; width: calc(var(--u) * 30.556) !important; height: 100% !important; }
+  .heroin { padding-left: calc(var(--u) * 5.556) !important; padding-right: calc(var(--u) * 5.556) !important; }
+  .hero-h1 { font-size: calc(var(--u) * 20.833) !important; }
+  .pills { gap: 14px !important; flex-wrap: wrap; min-width: 0; }
+  .hero-bottom { gap: 24px; }
+  .hero-meta { flex-shrink: 0; white-space: nowrap; }
+  .f-pills { max-width: calc(var(--u) * 60); flex-wrap: wrap; }
+  .menu-panel { height: 100% !important; }
+
+  .s-h2 { font-size: clamp(30px, 4.6vw, var(--fs)) !important; }
+  .s-about h2.s-h2 { width: 100% !important; max-width: 800px !important; }
+  .about-row { padding: 0 !important; gap: 48px !important; }
+  .about-text { width: auto !important; flex: 1 1 0 !important; min-width: 0; }
+  .about-img  { width: 44% !important; height: auto !important; aspect-ratio: 4 / 3; flex: 0 0 44% !important; }
+
+  .f-h2 { font-size: calc(var(--u) * 8.194) !important; max-width: calc(var(--u) * 62.5) !important; }
+  .f-mail { font-size: calc(var(--u) * 3.75) !important; }
+  .f-copy { margin-right: calc(var(--u) * 24.3) !important; }
+}
+
+/* --- tablet (<= 1023px) --- */
+@media (max-width: 1023px) {
+  .hero { height: 760px !important; }
+  .hero-photo, .hero-shade { right: 0 !important; width: 56% !important; }
+  .heroin { padding: 28px 40px 36px !important; }
+  .hero-h1 { font-size: calc((100vw - 80px) / 3.85) !important; }
+  .hero-bottom { margin-top: 28px !important; gap: 20px; }
+  .menu-panel { width: min(504px, 100vw) !important; }
+  .menu-l { font-size: clamp(44px, 9vw, 80px) !important; }
+
+  .s-about, .s-projects { padding: 96px 40px !important; min-height: 0 !important; }
+  .s-about { gap: 56px; }
+  .s-projects { gap: 40px !important; }
+  .s-skills { padding: 88px 40px 72px !important; min-height: 0 !important; }
+  .thumb { display: none !important; }
+  .wrow-t { font-size: clamp(22px, 3.8vw, var(--fs)) !important; }
+
+  .footer { height: auto !important; }
+  .f-in { height: auto !important; padding: 64px 40px 36px !important; gap: 64px; }
+  .f-top { width: 100%; }
+  .f-h2 { font-size: 11vw !important; max-width: 100% !important; }
+  .f-mail { font-size: 5.4vw !important; overflow-wrap: anywhere; }
+  .f-pills { flex-wrap: wrap; max-width: 62% !important; }
+  #bunnyWrap { left: auto !important; right: -10px !important; top: auto !important; bottom: -24px !important; width: 30vw !important; }
+  .f-top { padding-bottom: 8vw; }
+  .f-copy { margin-right: 0 !important; }
+}
+
+/* --- mobile (<= 639px) --- */
+@media (max-width: 639px) {
+  .hero { height: min(720px, 100svh, 175vw) !important; min-height: 560px; }
+  .hero-photo, .hero-shade { width: 100% !important; }
+  .hero-photo { object-position: 62% 30% !important; }
+  .hero-shade { background: linear-gradient(180deg, rgba(21,8,7,0.15) 0%, rgba(21,8,7,0.1) 40%, rgba(21,8,7,0.78) 100%) !important; }
+  .heroin { padding: 20px 20px 28px !important; }
+  .heroin nav img { height: 76px !important; width: auto !important; }
+  .hero-h1 { font-size: calc((100vw - 40px) / 3.85) !important; }
+  .hero-bottom { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; margin-top: 22px !important; }
+  .pills { gap: 8px !important; }
+  .pill { padding: 9px 14px 9px 14px !important; border-radius: 14px !important; }
+  .pill span { font-size: 13px !important; }
+  .hero-meta { text-align: left !important; font-size: 11px !important; }
+  .menu-l { font-size: 12vw !important; }
+  .menu-panel nav { gap: 4px !important; }
+
+  .s-about, .s-projects { padding: 64px 20px !important; }
+  .s-about { gap: 40px; }
+  .s-about h2.s-h2 { font-size: clamp(28px, 8vw, 40px) !important; }
+  .s-h2 { font-size: clamp(28px, 8.4vw, 40px) !important; }
+  .about-row { flex-direction: column !important; align-items: stretch !important; gap: 32px !important; }
+  .about-img { width: 100% !important; flex: none !important; aspect-ratio: 4 / 3.4; }
+  .s-projects { gap: 32px !important; }
+
+  .wrow { height: auto !important; min-height: 104px; flex-direction: column !important; align-items: flex-start !important;
+          justify-content: center !important; gap: 14px; padding: 22px 0; }
+  .wrow-t { font-size: clamp(22px, 6.6vw, 28px) !important; }
+
+  .s-skills { padding: 64px 20px 56px !important; }
+
+  .f-in { padding: 48px 20px 28px !important; gap: 40px; }
+  .f-h2 { font-size: 13.5vw !important; letter-spacing: -0.045em !important; }
+  .f-mail { font-size: 7.2vw !important; }
+  .f-pills { max-width: 100% !important; gap: 10px !important; margin-top: 8px !important; }
+  .f-pills a { font-size: 15px !important; padding: 11px 18px !important; }
+  .f-top { padding-bottom: 60vw; }
+  #bunnyWrap { width: 44vw !important; right: -4px !important; bottom: -18px !important; }
+  .f-bot { font-size: 13px !important; gap: 12px; }
+}
+
+/* --- touch devices: no hover previews / pointer-follow effects --- */
+@media (hover: none) {
+  .thumb { display: none !important; }
+  a.card:hover { transform: none; }
+}

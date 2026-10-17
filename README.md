@@ -13,6 +13,7 @@ project2.html      Project 02 — Branding + Product Marketing
 project3.html      Project 03 — Web, SEO and copy
 project4.html      Project 04 — Event engagement
 assets/            Images, videos, and favicon
+assets/css/responsive.css  Mobile / tablet / laptop layout rules (see below)
 assets/js/main.js  Vanilla JS for the homepage's interactive bits:
                    hamburger menu, project-list hover reveal, the
                    "shopping cart" skills animation, the footer bunny
@@ -23,6 +24,20 @@ nginx/serinali-portfolio.conf   Ready-to-edit nginx server block
 ```
 
 Total size is about 17 MB, mostly the photo/video assets.
+
+## Responsive behavior
+
+Every page adapts to the screen while keeping the same structure and order:
+
+| Width | Layout |
+|---|---|
+| 1440px and up | Original desktop design (content capped at 1440px and centered) |
+| 1024-1439px | Same layout, scaling fluidly (hero type, bunny, columns) |
+| 640-1023px (tablet) | Tighter padding, stats in 2 columns, title/meta stacked, hero photo behind the name |
+| up to 639px (phone) | Single column, 2-column stat grids, full-bleed hero photo, project rows stacked |
+
+All rules live in `assets/css/responsive.css`. The project-list hover previews and
+the pointer-following bunny are hover-only; touch devices get plain links.
 
 ## Deploying to your VM
 

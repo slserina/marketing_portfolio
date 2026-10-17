@@ -33,7 +33,11 @@
   var menuLine2 = $('menuLine2');
   var footer = $('contact');
 
-  var ROWH = 124;
+  // Desktop-only hover effects (project-list preview thumbnails + fill).
+  // On touch devices and narrow screens the rows are plain links.
+  var hoverMQ = window.matchMedia ? window.matchMedia('(hover: hover) and (min-width: 1024px)') : null;
+  function hoverOK() { return hoverMQ ? hoverMQ.matches : true; }
+  function rowH() { return (rowEls[0] && rowEls[0].offsetHeight) || 124; }
   function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
   function updateMenu() {
@@ -65,7 +69,7 @@
       }
       if (shiftEls[i]) {
         if (state.hover === i) {
-          var mid = i * ROWH + ROWH / 2;
+          var mid = i * rowH() + rowH() / 2;
           var dx = clamp((state.mx - 890) * 0.08, -30, 30);
           var dy = clamp((state.my - mid) * 0.3, -24, 24);
           tf[i] = 'translate(' + dx + 'px, ' + dy + 'px)';
@@ -108,10 +112,12 @@
   }
   rowEls.forEach(function (a, i) {
     a.addEventListener('mouseenter', function (e) {
+      if (!hoverOK()) return;
       var r = a.getBoundingClientRect();
       doEnter(i, e.clientY < r.top + r.height / 2);
     });
     a.addEventListener('mouseleave', function (e) {
+      if (!hoverOK()) return;
       var r = a.getBoundingClientRect();
       doExit(i, e.clientY > r.top + r.height / 2);
     });
@@ -120,6 +126,7 @@
   var moveRaf = 0;
   if (worklist) {
     worklist.addEventListener('mousemove', function (e) {
+      if (!hoverOK()) return;
       var r = worklist.getBoundingClientRect();
       var mx = e.clientX - r.left, my = e.clientY - r.top;
       if (!moveRaf) {
@@ -145,15 +152,16 @@
     if (scrollRaf) return;
     scrollRaf = requestAnimationFrame(function () {
       scrollRaf = 0;
-      if (px == null || !worklist) return;
+      if (px == null || !worklist || !hoverOK()) return;
       var r = worklist.getBoundingClientRect();
       var cur = state.hover;
       var inside = px >= r.left && px <= r.right && py >= r.top && py < r.bottom - 1;
       if (inside) {
-        var idx = Math.floor((py - r.top) / ROWH);
+        var RH = rowH();
+        var idx = Math.floor((py - r.top) / RH);
         idx = Math.max(0, Math.min(3, idx));
         if (idx === cur) return;
-        var fromTop = cur >= 0 ? idx > cur : ((py - r.top) - idx * ROWH) < 62;
+        var fromTop = cur >= 0 ? idx > cur : ((py - r.top) - idx * RH) < RH / 2;
         if (cur >= 0) doExit(cur, idx > cur);
         doEnter(idx, fromTop);
         state.mx = px - r.left; state.my = py - r.top;
