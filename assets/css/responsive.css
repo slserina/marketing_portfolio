@@ -217,3 +217,10 @@ img, video { max-width: 100%; }
   }
   .hero-photo, .hero-shade { right: max(80px, calc((100% - 1280px) / 2)) !important; }
 }
+
+/* Wide screens: scale the whole design up with the window (zoom is set by a
+   tiny script in each page: window width / 1440, capped at 2x). Above that
+   the content stays in a centered column and only the backgrounds keep growing. */
+@media (min-width: 1441px) {
+  .pg { zoom: var(--z, 1); }
+}
